@@ -12,17 +12,19 @@ const reducer = (state, action) => {
   }
 };
 
+const API_URL = "https://jsonplaceholder.typicode.com/users";
+
 const initialState = {
   dentists: [],
   favs: [],
+  api_url: API_URL
 };
 
 const Context = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const API_URL = "https://jsonplaceholder.typicode.com/users";
-
+  
   useEffect(() => {
-    axios(API_URL)
+    axios(state.api_url)
       .then((res) => {
         if (res.status == 200) {
           dispatch({ type: "GET_DENTISTS", payload: res.data });
