@@ -6,17 +6,19 @@ const Form = () => {
     name: "",
     email: "",
   });
-  const [typeSubmit, setTypeSubmit] = useState({})
-  
+  const [typeSubmit, setTypeSubmit] = useState({});
+  const regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(data.name.length>3){
-      setTypeSubmit({success:true})
-    }else{
-      setTypeSubmit({error:true})
+    if (data.name.trim().length > 5 && regexEmail.test(data.email)) {
+      console.log(
+        `Datos del submit: Nombre: ${data.name} - Email: ${data.email}`
+      );
+      setTypeSubmit({ success: true });
+    } else {
+      setTypeSubmit({ error: true });
     }
-    
   };
 
   return (
@@ -24,10 +26,11 @@ const Form = () => {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Nombre"
+          placeholder="Nombre completo"
           value={data.name}
           onChange={(e) => {
             setData({ ...data, name: e.target.value });
+            setTypeSubmit({});
           }}
         />
         <input
@@ -36,12 +39,15 @@ const Form = () => {
           value={data.email}
           onChange={(e) => {
             setData({ ...data, email: e.target.value });
+            setTypeSubmit({});
           }}
         />
         <button>Enviar</button>
       </form>
-      {typeSubmit.success && <p>Logrado</p>}
-      {typeSubmit.error && <p>Error</p>}
+      {typeSubmit.success && (
+        <p>{`Gracias ${data.name}, te contactaremos cuando antes vía mail`}</p>
+      )}
+      {typeSubmit.error && <p>Por favor verifique su información nuevamente</p>}
     </div>
   );
 };
