@@ -9,12 +9,18 @@ const Card = ({ name, username, id }) => {
   const addFav = () => {
     if (!isFav) {
       dispatch({ type: "ADD_FAV", payload: { id, name, username } });
+
+      //setIsFav(true)
+      
+      alert('Agregado')
     } else {
       dispatch({ type: "DELETE_FAV", payload: id });
+      alert('Borrado')
     }
   };
 
   useEffect(() => {
+    console.log('Ejecutado');
     const encontrado = state.favs.find((fav) => fav.id === id);
     setIsFav(encontrado);
   }, [state.favs]);
@@ -24,18 +30,19 @@ const Card = ({ name, username, id }) => {
       {/* En cada card deberan mostrar en name - username y el id */}
       {/* No debes olvidar que la Card a su vez servira como Link hacia la pagina de detalle */}
       {/* Ademas deberan integrar la logica para guardar cada Card en el localStorage */}
+
+      <img
+        style={{ maxWidth: "100%" }}
+        src="/public/images/doctor.jpg"
+        alt="doctor image"
+      />
       <Link to={"/dentista/" + id}>
-        <img
-          style={{ maxWidth: "100%" }}
-          src="/public/images/doctor.jpg"
-          alt="doctor image"
-        />
-        <p>{name}</p>
-        <p>{username}</p>
+        {name}
       </Link>
+      <p>{username}</p>
 
       <button onClick={addFav} className="favButton">
-        {isFav ? "Encontrado" : "No encontrado"}
+        {isFav ? <i className={'fas fa-star'}></i> : <i className={'far fa-star'}></i>}
       </button>
     </div>
   );

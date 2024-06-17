@@ -23,7 +23,7 @@ const Detail = () => {
   }, []);
 
   return (
-    <>
+    <div className={state.theme}>
       {/* aqui deberan renderizar la informacion en detalle de un user en especifico */}
       {/* Deberan mostrar el name - email - phone - website por cada user en especifico */}
       {dentist.id ? (
@@ -39,7 +39,6 @@ const Detail = () => {
               </tr>
             </thead>
             <tbody> 
-              <tr></tr>
               <tr>
                 <td>{dentist.name}</td>
                 <td>{dentist.email}</td>
@@ -52,7 +51,7 @@ const Detail = () => {
       ) : (
         <p>Cargando</p>
       )}
-    </>
+    </div>
   );
 };
 

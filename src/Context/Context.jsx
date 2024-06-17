@@ -20,6 +20,9 @@ const reducer = (state, action) => {
       const filteredFavs = state.favs.filter((fav) => fav.id != action.payload);
       localStorage.setItem("favs", JSON.stringify(filteredFavs));
       return { ...state, favs: filteredFavs };
+    case "CHANGE_THEME":
+      const newTheme = state.theme == "light" ? "dark" : "light";
+      return { ...state, theme: newTheme };
   }
 };
 
@@ -28,6 +31,7 @@ const API_URL = "https://jsonplaceholder.typicode.com/users";
 const initialState = {
   dentists: [],
   favs: [],
+  theme: "light",
   api_url: API_URL,
 };
 
@@ -35,7 +39,7 @@ const Context = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    dispatch({ type: "GET_FAVS"});
+    dispatch({ type: "GET_FAVS" });
   }, []);
 
   useEffect(() => {
