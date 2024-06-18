@@ -3,15 +3,13 @@ import React, { createContext, useContext, useEffect, useReducer } from "react";
 
 const MainState = createContext();
 
+const localFavs = localStorage.getItem("favs") ?  JSON.parse(localStorage.getItem("favs")) : [];
+const localTheme = localStorage.getItem("theme") ?  JSON.parse(localStorage.getItem("theme")) : 'light';
+
 const reducer = (state, action) => {
   switch (action.type) {
     case "GET_DENTISTS":
       return { ...state, dentists: action.payload };
-    case "GET_FAVS":
-      const localData = localStorage.getItem("favs")
-        ? JSON.parse(localStorage.getItem("favs"))
-        : [];
-      return { ...state, favs: localData };
     case "ADD_FAV":
       const newFavs = [...state.favs, action.payload];
       localStorage.setItem("favs", JSON.stringify(newFavs));
@@ -22,6 +20,7 @@ const reducer = (state, action) => {
       return { ...state, favs: filteredFavs };
     case "CHANGE_THEME":
       const newTheme = state.theme == "light" ? "dark" : "light";
+      localStorage.setItem("theme", JSON.stringify(newTheme));
       return { ...state, theme: newTheme };
   }
 };
@@ -30,17 +29,13 @@ const API_URL = "https://jsonplaceholder.typicode.com/users";
 
 const initialState = {
   dentists: [],
-  favs: [],
-  theme: "light",
+  favs: localFavs,
+  theme: localTheme,
   api_url: API_URL,
 };
 
 const Context = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-
-  useEffect(() => {
-    dispatch({ type: "GET_FAVS" });
-  }, []);
 
   useEffect(() => {
     axios(state.api_url)

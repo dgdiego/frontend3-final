@@ -9,21 +9,19 @@ const Card = ({ name, username, id }) => {
   const addFav = () => {
     if (!isFav) {
       dispatch({ type: "ADD_FAV", payload: { id, name, username } });
-
-      //setIsFav(true)
-      
-      alert('Agregado')
+      setIsFav(true);
+      alert("Agregado");
     } else {
       dispatch({ type: "DELETE_FAV", payload: id });
-      alert('Borrado')
+      setIsFav(false);
+      alert("Borrado");
     }
   };
 
   useEffect(() => {
-    console.log('Ejecutado');
     const encontrado = state.favs.find((fav) => fav.id === id);
     setIsFav(encontrado);
-  }, [state.favs]);
+  }, []);
 
   return (
     <div className="card" style={{ textAlign: "center" }}>
@@ -33,16 +31,18 @@ const Card = ({ name, username, id }) => {
 
       <img
         style={{ maxWidth: "100%" }}
-        src="/public/images/doctor.jpg"
+        src="/images/doctor.jpg"
         alt="doctor image"
       />
-      <Link to={"/dentista/" + id}>
-        {name}
-      </Link>
+      <Link to={"/dentista/" + id}>{name}</Link>
       <p>{username}</p>
 
       <button onClick={addFav} className="favButton">
-        {isFav ? <i className={'fas fa-star'}></i> : <i className={'far fa-star'}></i>}
+        {isFav ? (
+          <i className={"fas fa-star"}></i>
+        ) : (
+          <i className={"far fa-star"}></i>
+        )}
       </button>
     </div>
   );

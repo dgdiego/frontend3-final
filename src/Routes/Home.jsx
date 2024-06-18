@@ -10,7 +10,7 @@ const Home = () => {
   return (
     <main className={state.theme}>
       <h1>Home</h1>
-      <div className="card-grid">
+      <div className="card-grid container-wrapper">
         {/* Aqui deberias renderizar las cards */}
         {state.dentists.map((dentist) => (
           <Card

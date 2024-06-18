@@ -8,15 +8,25 @@ const Navbar = () => {
   const { state, dispatch } = useMainState();
 
   return (
-    <nav className={state.theme}>
-      {/* Aqui deberan agregar los liks correspondientes a las rutas definidas */}
-      {/* Deberan implementar ademas la logica para cambiar de Theme con el button */}
-      DH Odonto
-      <Link to={"/"}>Home</Link>
-      <Link to={"/contacto"}>Contacto</Link>
-      <Link to={"/favs"}>Favs</Link>
-      <button onClick={() => dispatch({type:'CHANGE_THEME'})}>{state.theme == 'dark'?  <i className={'fas fa-lightbulb'}></i> : <i className={'fas fa-moon'}></i>}</button>
-    </nav>
+    <div className={state.theme}>
+      <nav className="container-wrapper">
+        {/* Aqui deberan agregar los liks correspondientes a las rutas definidas */}
+        {/* Deberan implementar ademas la logica para cambiar de Theme con el button */}
+        <div>DH Odonto</div>
+        <div className="nav-list">
+          <Link to={"/"}>Home</Link>
+          <Link to={"/contacto"}>Contacto</Link>
+          <Link to={"/favs"}>Favs</Link>
+          <button onClick={() => dispatch({ type: "CHANGE_THEME" })}>
+            {state.theme == "dark" ? (
+              <i className={"fas fa-lightbulb"}></i>
+            ) : (
+              <i className={"fas fa-moon"}></i>
+            )}
+          </button>
+        </div>
+      </nav>
+    </div>
   );
 };
 
