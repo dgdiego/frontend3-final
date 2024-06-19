@@ -44,10 +44,14 @@ const Form = () => {
         />
         <button>Enviar</button>
       </form>
-      {typeSubmit.success && (
-        <p>{`Gracias ${data.name}, te contactaremos cuando antes vía mail`}</p>
-      )}
-      {typeSubmit.error && <p>Por favor verifique su información nuevamente</p>}
+      <div className="form-info">
+        {typeSubmit.success && (
+          <p className="success">{`Gracias ${data.name}, te contactaremos cuanto antes vía mail`}</p>
+        )}
+        {typeSubmit.error && (
+          <p className="error">Por favor verifique su información nuevamente</p>
+        )}
+      </div>
     </div>
   );
 };

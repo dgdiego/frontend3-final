@@ -6,9 +6,8 @@ import { useMainState } from "../Context/Context";
 
 const Favs = () => {
   const { state } = useMainState();
-
   return (
-    <div className={state.theme}>
+    <div className={`${state.theme} section`}>
       <h1>Dentists Favs</h1>
       <div className="card-grid">
         {/* este componente debe consumir los destacados del localStorage */}

@@ -8,7 +8,7 @@ const Contact = () => {
   const { state } = useMainState();
 
   return (
-    <div className={state.theme}>
+    <div className={`${state.theme} section form-section`}>
       <h2>Want to know more?</h2>
       <p>Send us your questions and we will contact you</p>
       <Form />

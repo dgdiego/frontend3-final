@@ -8,7 +8,7 @@ const Home = () => {
   const { state } = useMainState();
 
   return (
-    <main className={state.theme}>
+    <main className={`${state.theme} section`}>
       <h1>Home</h1>
       <div className="card-grid container-wrapper">
         {/* Aqui deberias renderizar las cards */}
