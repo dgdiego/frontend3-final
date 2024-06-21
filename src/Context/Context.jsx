@@ -3,8 +3,12 @@ import React, { createContext, useContext, useEffect, useReducer } from "react";
 
 const MainState = createContext();
 
-const localFavs = localStorage.getItem("favs") ?  JSON.parse(localStorage.getItem("favs")) : [];
-const localTheme = localStorage.getItem("theme") ?  JSON.parse(localStorage.getItem("theme")) : 'light';
+const localFavs = localStorage.getItem("favs")
+  ? JSON.parse(localStorage.getItem("favs"))
+  : [];
+const localTheme = localStorage.getItem("theme")
+  ? JSON.parse(localStorage.getItem("theme"))
+  : "light";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -22,6 +26,10 @@ const reducer = (state, action) => {
       const newTheme = state.theme == "light" ? "dark" : "light";
       localStorage.setItem("theme", JSON.stringify(newTheme));
       return { ...state, theme: newTheme };
+    default:
+      const error = "Error al modificar el estado";
+      console.error(error);
+      throw new Error(error);
   }
 };
 
